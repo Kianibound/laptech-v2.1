@@ -1,0 +1,90 @@
+<?php // bcsalesorder.php
+include_once 'bcheader.php';
+
+if (!isset($_SESSION['user']))
+	die("<br /><br />You need to login to view this page");
+$user = $_SESSION['user'];
+
+if (isset($_GET["date"]))
+{
+    $req_date = ($_GET["date"]);
+}
+else 
+{
+    $req_date = date('Y-m-d');
+}
+$Order = 0;
+if (isset($_GET["order"]))
+{
+    $Order = ($_GET["order"]);
+}
+
+//check that the number entered is new
+//if not new show order details and give next new item# and show change options
+//then add item
+    //
+    //
+
+$result = queryMysql($mysqli, "SELECT * FROM bcsalesorders WHERE salesorder = $Order ORDER BY item");
+$num = mysqli_num_rows($result);
+if ($num != 0)
+{
+    echo"   <table border='4'>
+                    <tr>
+                    <th>Sales Order #</th>
+                    <th>Item #</th>
+                    <th>Quantity</th>
+                    <th>Product Code</th>
+                    <th>Customer</th>
+                    <th>Description</th>
+                    <th>Date expected at Customer</th>
+                    <th>Date expected to ship</th>
+                    <th>Actual ship date</th>
+                    <th>Comments</th>
+                    </tr>";
+            for ($ki = 0; $ki < $num; ++$ki)
+            {
+                $row = mysqli_fetch_row($result);
+                                                                
+            echo "
+                    <tr>
+                    <td><a href='bcsalesview.php?Order=$row[0]'>$row[0]</td>
+                    <td> ".$row[1]."</td>
+                    <td> ".$row[2]."</td>
+                    <td> ".$row[3]."</td>
+                    <td> ".$row[4]."</td>
+                    <td> ".$row[5]."</td>
+                    <td> ".$row[6]."</td>
+                    <td> ".$row[7]."</td>
+                    <td> ".$row[8]."</td>
+                    <td> ".$row[9]."<td>
+                    </tr>
+                    ";
+            }
+}
+                    
+                        //show add item and change item boxes
+echo '
+<table class="floatleft" border="0" cellpadding="2"
+cellspacing="5" bgcolor="#eeeeee">
+<th colspan="2" align="center">Add Item</th>
+<form method="post" action="bcsalesorder.php?View='.$row[0].'"
+        onSubmit="return validate(this)">
+</tr><tr><td>Quantity</td><td><input type="text" maxlength="16"
+        name="Quantity" /></td>
+</tr><tr><td>Product code</td><td><input type="text" maxlength="16"
+        name="Productcode" /></td>
+</tr><tr><td>Customer</td><td><input type="text" maxlength="128"
+        name="Customer" /></td>
+</tr><tr><td>description</td><td><input type="text" maxlength="128"
+        name="Description" /></td>
+</tr><tr><td>requested ship date</td><td><input type="text" maxlength="128"
+        name="req_ship_date" /></td>
+</tr><tr><td>expected </td><td><input type="text" maxlength="128"
+        name="Ccustomer" /></td>
+</tr><tr><td colspan="2" align="center">
+        <input type="submit" value="Go" /></td>
+</tr></form></table>
+';
+
+?>

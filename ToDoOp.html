@@ -1,0 +1,19 @@
+
+
+<table class="floatleft" border="0" cellpadding="2"
+            cellspacing="5" bgcolor="#eeeeee">
+    <th colspan="2" align="center">End Operation</th>
+    <form method="post" action="DoOp.php?View='$batch'"
+            onSubmit="return validate(this)">
+             <tr><td>Operation (Global)</td><td><input type="text" maxlength="3"
+            name="OpNo" value=$op></td>
+    </tr><tr><td>Quantity Completed</td><td><input type="text" maxlength="16"
+            name="Quantity" /></td>
+    </tr><tr><td>Quantity Scrapped</td><td><input type="text" maxlength="16"
+            name="Scrapped" /></td>
+    </tr><tr><td>comments</td><td><input type="text" maxlength="128"
+            name="Comments" /></td>
+    <input type="hidden" name="Build_type" value='$Build_Type' />
+    </tr><tr><td colspan="2" align="center">
+            <input type="submit" value="Go" /></td>
+    </tr></form></table>

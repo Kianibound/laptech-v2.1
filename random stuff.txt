@@ -1,0 +1,20 @@
+// onclick="openWin()"
+echo <<<_END
+<script>            
+function openWin()
+{
+myWindow=window.open('ToDoOp.php?View=$batch','','width=200,height=100');
+
+}
+</script>
+_END;
+
+echo <<<_END
+   <li class="parent"><span><a href="bcbatches.php">Actions</a></span>
+  <ul class="level-1">
+                  <li><a href="bccloseconfirm.php?Close=1">Close this batch</a></li>
+          <li><a href="products5bce.html?CategoryID=3">Search Batches</a></li>
+          <li><a href="products96eb.html?CategoryID=4">Stop all batches for $user</a></li>
+          <li><a href="bcmessages.php">Create</a></li></ul>
+</li>
+_END;

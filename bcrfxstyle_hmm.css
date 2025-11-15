@@ -1,0 +1,185 @@
+body2
+{
+font-size:75%;
+font-family: Arial, Helvetica, sans-serif;
+/*background-image:url('images/main-bg.png');*/
+/*background-image:url('Green-Gradient.jpg');*/
+/*background-repeat:repeat-x;*/
+background-size:100%, 100%;
+/*background-image:url('gradient.png');*/
+/*background-repeat:repeat-x;*/
+/*background-color:#99C673;*/
+color:#000080;
+margin:0px;
+}
+
+h1 {font-size:200%;
+position:absolute;
+left:160px;
+top:5px;
+z-index:-1;}
+h1h {font-size:200%;
+position:absolute;
+left:160px;
+top:5px;
+z-index:-1;
+color:red;}
+h2 {font-size:120%;}
+h3 {font-size:100%;}
+h4 {font-size:200%;}
+h2 {font-size:120%;}
+h3 {font-size:100%;}
+h5 {font-size:70%}
+
+th {background-color:#ADD8E6;}
+
+ul {list-style:circle;}
+ol {list-style:upper-roman;}
+
+a:link {color:#000080;}
+a:hover {color:red;}
+
+input:focus
+{
+background-color:yellow;
+}
+
+input[type="password"]
+{
+width:150px;
+display:block;
+margin-bottom:4px;
+}
+input[type="button"]
+{
+width:120px;
+margin-left:35px;
+display:block;
+}
+
+input[type="text"]
+{
+width:150px;
+display:block;
+margin-bottom:0px;
+}
+input[type="submit"]
+{
+margin-left:5px;
+display:block;
+}
+
+.rfximg
+{
+position:absolute;
+left:50px;
+top:5px;
+z-index:-1;
+}
+
+.right
+{
+position:relative;
+float:right;
+margin:5px;
+}
+
+.absright
+{
+position:absolute;
+right:5000;
+top:200px;
+margin:5px;
+}
+
+.left
+{
+position:relative;
+float:left;
+margin:5px;
+}
+
+.centre
+{
+position:relative;
+float:left;
+margin:5px;
+width: 400;
+}
+
+.floatleft 
+{
+float:left;
+margin:25px;
+}
+.floatright 
+{
+float:right;
+margin:5px;
+font-size:90%;
+background:white;
+}
+
+.tablefloatleft 
+{
+float:left;
+margin:0px;
+width:100%;
+font-size:75%;
+background:white;
+text-align:left;
+}
+
+.rotated_cell
+{
+ height:300px;
+ vertical-align:bottom
+}
+
+
+.rotate_text
+      {
+         -moz-transform:rotate(-90deg); 
+         -moz-transform-origin: top left;
+         -webkit-transform: rotate(-90deg);
+         -webkit-transform-origin: top left;
+         -o-transform: rotate(-90deg);
+         -o-transform-origin:  top left;
+          position:relative;
+         top:20px;
+      }
+
+.margin_only
+{
+margin:5px;
+}
+
+.under
+{
+position:relative;
+display:block;
+left:70px;
+}
+
+table
+{
+border-collapse:collapse;
+font-size:75%;
+}
+
+
+table, td th
+{
+border:1px solid blue;
+font-size:75%
+}
+
+#mychart {
+  position:relative;
+    float:right;
+    margin:10px 10px 10px 10px;
+    width:70%;
+    max-width:1400px;
+    height:400px;
+}
+

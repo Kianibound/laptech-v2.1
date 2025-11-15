@@ -1,0 +1,30 @@
+<?php
+include_once 'bcheader.php';
+if (!isset($_SESSION['user']))
+	die("<br /><br />You need to login to view this page");
+$user = $_SESSION['user'];
+
+if (isset($_POST['batchno']))
+	$batchno =($_POST['batchno']);
+if (isset($_POST['OpNo']))
+	$OpNo =($_POST['OpNo']);
+if (isset($_POST['Into_Stock']))
+	$into_stock = ($_POST['Into_Stock']);
+if (isset($_POST['Location']))
+	$Location = ($_POST['Location']);
+if (isset($_POST['Notes']))
+	$Notes = ($_POST['Notes']);
+if (isset($_POST['Product_code']))
+	$Product_code =($_POST['Product_code']);
+
+echo <<<_END
+</br></br>
+
+<form name="close" action="bcbatchinfo.php?Close=1" method="post">
+Close this batch. Note all operations will be locked after this action.
+<input type="submit" name=value="close" />
+</form>
+
+_END;
+
+?>
