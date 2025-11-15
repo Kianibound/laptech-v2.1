@@ -34,7 +34,7 @@ $globalop = 0;
 
 
 $operationnum = mysqli_num_rows($operationquery);
-$operationfields = mysql_num_fields($operationquery);
+$operationfields = mysqli_num_fields($operationquery);
 
 for ($j = 0; $j < $operationfields; $j++)
 {

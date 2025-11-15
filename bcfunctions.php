@@ -67,7 +67,7 @@ function destroySession()
 	session_destroy();
 }
 
-function sanitizeString($mysqli, $var)
+function sanitizeString(mysqli $mysqli, string $var): string
 {
 	$var = strip_tags($var);
 	$var = htmlentities($var);
@@ -139,8 +139,9 @@ function diff_sec_convert($time1, $time2)
     return $endsec->getTimestamp() - $startsec->getTimestamp();
 }
 
-function OpNotoOpName($OpNo)
+function OpNotoOpName(string $OpNo): string
 {
+    global $mysqli;
     $OpName = " ";
     $result = queryMysql($mysqli, "SELECT operation FROM bcoperations WHERE OpNo = '$OpNo'");
     $num = mysqli_num_rows($result);
@@ -152,8 +153,9 @@ function OpNotoOpName($OpNo)
 return $OpName;
 }
 
-function findlastoplocal($mysqli, $localOpNo,$batchno)
+function findlastoplocal(string $localOpNo, string $batchno): int
 {
+    global $mysqli;
     
     //find the previous local op no from the one entered $opNo is localop
     //get the build type and the productcode form batchinfo
@@ -161,7 +163,7 @@ function findlastoplocal($mysqli, $localOpNo,$batchno)
        
     $result = queryMysql($mysqli, "SELECT productcode, build_type FROM bcbatchinfo WHERE batchno = '$batchno'");
     $num = mysqli_num_rows($result);
-    //echo "testing <br />"; 
+    //echo "testing <br />";
     for ($ki = 0; $ki < $num; ++$ki)
             {
                 $row = mysqli_fetch_row($result);
@@ -200,12 +202,15 @@ return $globallastop;
 }
 
 // no usage found
-function findlastopglobal($OpNo,$batchno)
+function findlastopglobal(string $OpNo, string $batchno): int
 {
+    global $mysqli;
     //find the previous global op no from the one entered $opNo is globalop
     //get the build type and the productcode form batchinfo
     $result = queryMysql($mysqli, "SELECT productcode, build_type FROM bcbatchinfo WHERE batchno = '$batchno'");
     $num = mysqli_num_rows($result);
+    $productcode = "";
+    $build_type = "";
     for ($ki = 0; $ki < $num; ++$ki)
             {
                 $row = mysqli_fetch_row($result);
@@ -214,10 +219,11 @@ function findlastopglobal($OpNo,$batchno)
                 echo "<br />product code = $productcode";
                 echo "<br />build type = $build_type";
             }
+    $lastop = -1; // Initialize variable
     if ($OpNo != 1)
     {
         //search for the previous op (local - 1) and return the global op number for the previoius operation
-        $result = queryMysql($mysqli, "SELECT * FROM bcproductoperations WHERE Product_code = $productcode AND Build_type = $build_type");
+        $result = queryMysql($mysqli, "SELECT * FROM bcproductoperations WHERE Product_code = '$productcode' AND Build_type = '$build_type'");
         $num = mysqli_num_rows($result);
         for ($ki = 0; $ki < $num; ++$ki)
                 {
@@ -254,9 +260,15 @@ function updatestocklog($mysqli, $into_stock, $From_Stock, $Product_code ,  $OpN
     
 }
 
-function dropdown($table, $field, $Conditional_Field, $Condition, $Conditional_Value)
+function dropdown(string $table, string $field, ?string $Conditional_Field = null, ?string $Condition = null, ?string $Conditional_Value = null): array
 {
-    $result = queryMysql($mysqli, "SELECT DISTINCT $field FROM $table WHERE $Conditional_Field $Condition $Conditional_Value");
+    global $mysqli;
+    $query = "SELECT DISTINCT $field FROM $table";
+    if ($Conditional_Field && $Condition && $Conditional_Value) {
+        $query .= " WHERE $Conditional_Field $Condition $Conditional_Value";
+    }
+    $result = queryMysql($mysqli, $query);
+    $Output = [];
     $num = mysqli_num_rows($result);
     for ($ki = 0; $ki < $num; ++$ki)
             {

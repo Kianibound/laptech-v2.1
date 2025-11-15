@@ -49,7 +49,7 @@ if (isset($_GET['view']))
 {$view = ($_GET["view"]);}
 else {$view = 1;}
 $prev = 0;
-if (@$disp != 1)
+if (isset($disp) && $disp != 1)
 {
     include_once 'bcheader.php';
     if (!isset($_SESSION['user']))
@@ -209,8 +209,8 @@ if ($disp != 1)
 }
 
 
-if (@$check[0] != NULL)
-{ 
+if (isset($check) && is_array($check) && isset($check[0]) && $check[0] != NULL)
+{
 
 if ($disp == 2)
     {
@@ -317,7 +317,7 @@ $operations = queryMysql($mysqli, "SELECT * FROM bcoperations ORDER BY OpNo");
             $oprow = mysqli_fetch_row($operations);
             $err = $oprow[4] - 100;
             //echo "$err  $oprow[4]<br />      ";
-            if (@$oprow[4] == $dept || $err == $dept ||$dept == 0 ||$oprow[4] == 100 || ($dept >= 100 && $oprow[4] >=100))
+            if ((isset($oprow[4]) ? $oprow[4] : null) == $dept || $err == $dept ||$dept == 0 ||$oprow[4] == 100 || ($dept >= 100 && $oprow[4] >=100))
             {
                 //echo"<th font-size:50% class='rotated_cell' width='1' ><a href='bcbatches.php?Arrange=batchno&search=$Search&Show=$stat&opcheck=$oprow[0]'><div class='rotate_text'> $oprow[1]</div></a></th>";
                 echo"<th   width='1' ><h5><a href='bcbatches.php?Arrange=batchno&search=$Search&Show=$stat&opcheck=".($oprow[0]-1)."'>$oprow[1]($oprow[0])</a></h5></th>";
@@ -673,7 +673,7 @@ else
         
         for ($globalop = 0; $globalop < $opcount; ++$globalop)
         { //find first operation
-            if (@$prod_opdatarow[$globalop+3] != '0')
+            if (isset($prod_opdatarow[$globalop+3]) && $prod_opdatarow[$globalop+3] != '0')
             {
                 $batcharray[$globalop] = $prod_opdatarow[$globalop+3];//local operations in order
                 $lastlocalop =$prod_opdatarow[$globalop+3];
@@ -710,7 +710,7 @@ else
             $k = $i + 1;
             $oprow = mysqli_fetch_row($operations);
             $err = $oprow[4] - 100;
-            if (@$oprow[4] == $dept || $err == $dept ||$dept == 0 ||$oprow[4] == 100 || ($dept >= 100 && $oprow[4] >=100))
+            if ((isset($oprow[4]) ? $oprow[4] : null) == $dept || $err == $dept ||$dept == 0 ||$oprow[4] == 100 || ($dept >= 100 && $oprow[4] >=100))
             {
                // echo "$i, $oprow[4], $dept <br />";
                 //for this operation and batch search operations done

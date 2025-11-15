@@ -155,7 +155,7 @@ echo <<<_END
 </ul>
 </li>
 _END;
-if (@$batchinfo == 1)
+if (isset($batchinfo) && $batchinfo == 1)
 {
 if (isset($_GET["view"]))
 {
@@ -191,7 +191,7 @@ echo <<<_END
 </li>
 _END;
 
-if (@$salesview == 1)
+if (isset($salesview) && $salesview == 1)
 {
 if (isset($_GET["action"]))
 {
@@ -231,7 +231,7 @@ echo <<<_END
 <script type="text/javascript">if(window.attachEvent) { window.attachEvent("onload", function() { cssmw.intializeMenu('cssmw',{select_current: 1, orientation: 1}); }); } else if(window.addEventListener) { window.addEventListener("load", function() { cssmw.intializeMenu('cssmw',{select_current: 1, orientation: 1}); }, true); }</script>
      <div id="lib"><a href="bcfriends.php">COLLEAGUES</a></div></div>
 _END;
-if (@$batchinfo == 1)
+if (isset($batchinfo) && $batchinfo == 1)
 {
 echo <<<_END
    

@@ -3,6 +3,7 @@ include_once 'bcheader.php';
 if (!isset($_SESSION['user']))
 	die("<br /><br />You need to login to view this page");
 $user = $_SESSION['user'];
+global $mysqli;
 
 // Start with the PHP code
 
@@ -109,8 +110,8 @@ if (isset($_POST['opordercount']))
 	$opcount = $_POST['opordercount'];
         
         //echo "$Comments";
-//echo "global = $globalOpNo local = $OpNo";        
-$oporder_array = explode(",",@$oporder[0]);
+//echo "global = $globalOpNo local = $OpNo";
+$oporder_array = explode(",", isset($oporder[0]) ? $oporder[0] : "");
 //print_r ($oporder_array);
 for ($i = 0; $i != $opcount; ++$i)
 {
@@ -194,8 +195,9 @@ updatebcbacthinfo($batchno,$OpNo,$staffno,$Scrapped,$Quantity,$fail,-1,$Comments
 }
 function updatebcbacthinfo($batchno,$OpNo,$staffno,$Scrapped,$Quantity,$fail,$donelastop,$Comments)
 {
+    global $mysqli;
     $query = "SELECT start FROM bcoperationsdone WHERE batchno = '$batchno'
-                AND operation = '$OpNo' AND staffnumber = '$staffno[0]' 
+                AND operation = '$OpNo' AND staffnumber = '$staffno[0]'
                 AND start IS NOT NULL AND end IS NULL";
                 echo "<br />staff no. $staffno[0], Batch $batchno Op $OpNo";
     $result = queryMysql($mysqli, $query);
@@ -226,7 +228,7 @@ function updatebcbacthinfo($batchno,$OpNo,$staffno,$Scrapped,$Quantity,$fail,$do
     $query8 = "SELECT * FROM bcstocklog WHERE operation_number = '$OpNo' AND batchno = '$batchno'";
         $result8 = queryMysql($mysqli, $query8);
         $num8 = mysqli_num_rows($result8);
-        $From_Stock = 0; 
+        $From_Stock = 0;
         for ($j = 0; $j < $num8; ++$j)
         {
             $row8 = mysqli_fetch_row($result8);
@@ -261,10 +263,10 @@ function updatebcbacthinfo($batchno,$OpNo,$staffno,$Scrapped,$Quantity,$fail,$do
             echo '<br />number of units available for this operation =  '.$available.' <br />  ';
     echo "$Comments";
 
-            if ($available >= ($Quantity + $Scrapped)) 
+            if ($available >= ($Quantity + $Scrapped))
             
             {echo 'test point 1<br />';
-                if ($fail == "") 
+                if ($fail == "")
                 {
                     echo 'test point 2 <br />';
                     $now = date('c');
@@ -272,8 +274,8 @@ function updatebcbacthinfo($batchno,$OpNo,$staffno,$Scrapped,$Quantity,$fail,$do
                     scrap = '$Scrapped', end = '$now', Comments = '$Comments' WHERE batchno = '$batchno' AND operation = '$OpNo'
                     AND staffnumber = '$staffno[0]' AND start IS NOT NULL AND end IS NULL");
                     // This is where you would enter the posted fields into a database
-                    // go to this page on completion 
-                    // 
+                    // go to this page on completion
+                    //
                     if ($status == TRUE)
                     {
                         echo "</head><body><br /><br /><br />Quantity Entered successfully: $OpNo,
@@ -293,9 +295,9 @@ function updatebcbacthinfo($batchno,$OpNo,$staffno,$Scrapped,$Quantity,$fail,$do
                         exit;
                     }
                
-                } 
+                }
                 
-                echo "<br />failed? $fail"; 
+                echo "<br />failed? $fail";
                 echo "<br />not following this bit!!";
             }
             else

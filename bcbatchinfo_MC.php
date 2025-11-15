@@ -214,8 +214,8 @@ $Global_loop_counter = 0;
 for ($f2 = 0; $f2 < $opcount; ++$f2)
     {
         
-        @$oporder2 = mysqli_fetch_row($oporderquery);
-        if (@$oporder[$f2] != 0 || $Build_Type == "Full")
+        $oporder2 = mysqli_fetch_row($oporderquery);
+        if ((isset($oporder[$f2]) ? $oporder[$f2] : null) != 0 || $Build_Type == "Full")
             {
                 if ($Build_Type == "Full")
                 {

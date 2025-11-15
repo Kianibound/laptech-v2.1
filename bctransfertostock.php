@@ -104,7 +104,7 @@ else
 
 
 echo $added;
-if (@$added != 1)
+if (isset($added) && $added != 1)
 {
 echo '<br /><a href="bcbatchinfo.php?view='.$batchno.'",target="_blank">Return to Batch</a>';
 }

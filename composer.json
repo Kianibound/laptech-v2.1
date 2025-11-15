@@ -1,5 +1,19 @@
 {
+    "require": {
+        "php": "^8.0"
+    },
     "require-dev": {
         "phpunit/phpunit": "^12.4"
-    }
+    },
+    "autoload": {
+        "psr-4": {
+            "LapTech\\": "src/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }

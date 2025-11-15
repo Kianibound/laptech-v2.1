@@ -50,11 +50,11 @@ if (!isset($_SESSION['user']))
 $user = $_SESSION['user'];
 
 
-//queries mysql for data from the table bctodo which contains the data needed to generate the users todo 
+//queries mysql for data from the table bctodo which contains the data needed to generate the users todo
 //table
-$tableinfoquery	= queryMysql		("select * from bctodo where user='$user'");
+$tableinfoquery	= queryMysql($mysqli, "select * from bctodo where user='$user'");
 
-$tablenum 	= mysql_num_rows	($tableinfoquery);
+$tablenum 	= mysqli_num_rows($tableinfoquery);
 
 echo '<table class = "tablefloatleft" border="1" cellpadding="5" cellspacing="5" bgcolor="#eeeeee">
       <th>Batch</th><th>Op</th><th>number of units</th><th>created</th><th>Due</th><th>priority</th><th>are prerequisite there?</th><th>Started</th>
